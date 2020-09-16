@@ -1,0 +1,88 @@
+USE [TestDB]
+GO
+
+/****** Object:  Table [dbo].[OrderProcess]    Script Date: 11-09-2020 19:06:30 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[OrderProcess](
+	[OrderProcessId] [int] IDENTITY(1,1) NOT NULL,
+	[IsActive] [bit] NULL,
+	[PaymentFor] [nchar](200) NULL,
+	[IsActiveMembership] [bit] NULL,
+	[CustomerId] [int] NULL,
+ CONSTRAINT [PK_OrderProcess] PRIMARY KEY CLUSTERED 
+(
+	[OrderProcessId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+
+
+
+USE [TestDB]
+GO
+
+/****** Object:  Table [dbo].[CustomerDetail]    Script Date: 11-09-2020 19:23:38 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CustomerDetail](
+	[CustomerId] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerName] [nvarchar](100) NULL,
+	[CustomerAddress] [nvarchar](100) NULL,
+	[CustomerEmail] [nvarchar](50) NULL,
+ CONSTRAINT [PK_CustomerDetail] PRIMARY KEY CLUSTERED 
+(
+	[CustomerId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+
+
+
+USE [TestDB]
+GO
+
+/****** Object:  Table [dbo].[ProductDetail]    Script Date: 11-09-2020 19:24:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ProductDetail](
+	[ProductId] [int] NOT NULL,
+	[ProductName] [nvarchar](50) NULL,
+	[ProductPrice] [decimal](18, 0) NULL,
+	[CustomerId] [int] NULL,
+ CONSTRAINT [PK_ProductDetail] PRIMARY KEY CLUSTERED 
+(
+	[ProductId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[ProductDetail]  WITH CHECK ADD  CONSTRAINT [FK_ProductDetail_ProductDetail] FOREIGN KEY([ProductId])
+REFERENCES [dbo].[ProductDetail] ([ProductId])
+GO
+
+ALTER TABLE [dbo].[ProductDetail] CHECK CONSTRAINT [FK_ProductDetail_ProductDetail]
+GO
+
+
